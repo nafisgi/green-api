@@ -19,7 +19,11 @@ npm run dev
 | ---------------- | ------------------------------------------ | --------------------- |
 | `VITE_BASE_PATH` | Базовый путь сайта для Vite и React Router | `/`                   |
 
-Для GitHub Pages в репозитории `username.github.io/repo/` соберите проект командой `VITE_BASE_PATH=/repo/ npm run build` и опубликуйте `dist`.
+## GitHub Pages
+
+Сайт публикуется из ветки `main` по адресу <https://nafisgi.github.io/green-api/>. В настройках репозитория откройте **Settings → Pages** и выберите **GitHub Actions** в поле **Build and deployment → Source**. После этого каждый push в `main` запускает `.github/workflows/pages.yml`: он собирает приложение с `VITE_BASE_PATH=/green-api/` и публикует папку `dist`.
+
+Для локальной проверки сборки Pages выполните `VITE_BASE_PATH=/green-api/ npm run build`.
 
 ## Подключение
 
