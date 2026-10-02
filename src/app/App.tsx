@@ -1,12 +1,24 @@
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Suspense } from 'react'
+import { RouterProvider } from 'react-router/dom'
+import { Toaster } from 'sonner'
+
+import { PageSkeleton } from './PageSkeleton'
+import { queryClient } from './providers/query-client'
+import { router } from './router'
 import './styles/global.css'
 
-const App = () => (
-  <main className="grid min-h-dvh place-items-center bg-emerald-50 p-6 text-center">
-    <div>
-      <h1 className="text-3xl font-bold text-emerald-800">WhatsApp chat</h1>
-      <p className="mt-3 text-slate-600">Connect your GREEN-API instance to start chatting.</p>
-    </div>
-  </main>
-)
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<PageSkeleton />}>
+        <RouterProvider router={router} />
+      </Suspense>
+      <Toaster richColors position="top-right" />
+      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+    </QueryClientProvider>
+  )
+}
 
 export default App
